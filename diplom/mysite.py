@@ -19,7 +19,7 @@ app.config.from_object(__name__)
 @app.route("/run")
 def run():
     """ Эта функция запуская и отвечает за тесты страницы /example. """
-    os.chdir('/Diplom_Dollar_by/diplom/script/')
+    os.chdir('/Diplom_Dollar/diplom/script/')
     print(os.getcwd())
     cmd = ["ui.sh"]
     with subprocess.Popen(cmd, stdout=subprocess.PIPE,
