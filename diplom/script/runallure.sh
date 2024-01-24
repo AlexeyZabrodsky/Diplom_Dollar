@@ -1,2 +1,2 @@
 #!/bin/bash
-allure generate -o /class_work/diplom/tests/reports/ /class_work/diplom/tests/reports/ --clean
+allure generate -o /Diplom_dollar_by/diplom/results/ /Diplom_dollar_by/diplom/results/ --clean
