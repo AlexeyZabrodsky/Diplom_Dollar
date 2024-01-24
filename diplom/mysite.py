@@ -1,4 +1,4 @@
-import sys, json
+import sys, json, os
 import subprocess
 from flask import Flask, render_template
 from flask_flatpages import FlatPages, pygments_style_defs
@@ -19,8 +19,9 @@ app.config.from_object(__name__)
 @app.route("/run")
 def run():
     """ Эта функция запуская и отвечает за тесты страницы /example. """
-
-    cmd = ["C:/Diplom_Dollar_by/diplom/script/ui.sh"]
+    os.chdir('/Diplom_Dollar_by/diplom/script/')
+    print(os.getcwd())
+    cmd = ["ui.sh"]
     with subprocess.Popen(cmd, stdout=subprocess.PIPE,
                           stderr=subprocess.PIPE,
                           stdin=subprocess.PIPE,
