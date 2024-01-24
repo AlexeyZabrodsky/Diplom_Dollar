@@ -1,0 +1,17 @@
+{"site_url":"http://localhost:8000",
+"site_title": "Alexey_Zabrodsky",
+"description": "В этом приложении можно запускать тесты по сайтам dollar.by",
+"keywords": "Приложение по удаленному запускуу автотестов",
+"name": "ALEXEY ZABRODSKY",
+"tag1":"",
+"tag2":"QA Engineer",
+"sect1":"Home",
+"sect2":"About Me",
+"sect3":"Wiki",
+"sect4":"Portfolio",
+"sect5":"Contact Me",
+"telegram":"https://t.me/IAlexey_ZI",
+"vk":"https://vk.com/alexeylzl",
+"email":"mailto:LeshaZabrodsky@mail.ru",
+"city":"Минск"
+}
