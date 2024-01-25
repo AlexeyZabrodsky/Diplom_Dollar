@@ -31,6 +31,21 @@ def run():
     return render_template('blog.html', text=out, json=out)
 
 
+@app.route("/runallure")
+def run_allure():
+    """ Эта функция запуская и отвечает за генерацию отчета allure. """
+    os.chdir('/Diplom_Dollar/diplom/script/')
+    print(os.getcwd())
+    cmd = ["runallure.sh"]
+    with subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                          stderr=subprocess.PIPE,
+                          stdin=subprocess.PIPE,
+                          universal_newlines=True,
+                          shell=True) as result:
+        out = result.communicate()
+    return render_template('blog.html', text=out, json=out)
+
+
 @app.route("/")
 def index():
     posts = [p for p in flatpages if p.path.startswith(POST_DIR)]
