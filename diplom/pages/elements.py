@@ -181,6 +181,23 @@ class WebElement(object):
             msg = 'Element with locator {0} not found'
             raise AttributeError(msg.format(self._locator))
 
+    def send_keys_2(self, keys, wait=2):
+        """ Нажимает на элемент, выделяет его. """
+
+        keys = keys.replace('\n', '\ue007')
+
+        element = self.find()
+        action = ActionChains(self._web_driver)
+
+        if element:
+            element.click()
+            action.move_to_element(element).key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
+            element.send_keys(keys)
+            time.sleep(wait)
+        else:
+            msg = 'Element with locator {0} not found'
+            raise AttributeError(msg.format(self._locator))
+
     def send_keys_all_select(self, keys, wait=2):
         """ Отправить ключи к элементу второй вариант. """
 
@@ -353,7 +370,6 @@ class WebElement(object):
         except Exception as e:
             pass  # Просто игнорирует ошибку, если мы не можем отправить ключи к элементу
 
-
     def scroll_to_element_2(self):
         """ Прокрутить страницу до элемента. """
 
@@ -362,7 +378,6 @@ class WebElement(object):
         # # Прокрутить страницу до элемента:
         # Option #1 для прокрутки до элемента:
         self._web_driver.execute_script("arguments[0].scrollIntoView();", element)
-
 
     def scroll_to_element_3(self):
         """ Прокрутить страницу до элемента. """
@@ -381,7 +396,6 @@ class WebElement(object):
 
         # Прокручиваем страницу
         self._web_driver.execute_script("window.scrollBy(0, arguments[0]);", scroll_offset)
-
 
     def delete(self):
         """ Удаляет элемент со страницы. """
@@ -472,3 +486,4 @@ class ManyWebElements(WebElement):
 
         # Сделать скриншот страницы:
         self._web_driver.save_screenshot(file_name)
+

@@ -20,7 +20,6 @@ app.config.from_object(__name__)
 def run():
     """ Эта функция запуская и отвечает за тесты страницы /example. """
     os.chdir('/Diplom_Dollar/diplom/script/')
-    print(os.getcwd())
     cmd = ["ui.sh"]
     with subprocess.Popen(cmd, stdout=subprocess.PIPE,
                           stderr=subprocess.PIPE,
@@ -28,14 +27,13 @@ def run():
                           universal_newlines=True,
                           shell=True) as result:
         out = result.communicate()
-    return render_template('blog.html', text=out, json=out)
+    return render_template('done.html', text=out, json=out)
 
 
 @app.route("/runallure")
 def run_allure():
     """ Эта функция запуская и отвечает за генерацию отчета allure. """
     os.chdir('/Diplom_Dollar/diplom/script/')
-    print(os.getcwd())
     cmd = ["runallure.sh"]
     with subprocess.Popen(cmd, stdout=subprocess.PIPE,
                           stderr=subprocess.PIPE,
@@ -43,7 +41,7 @@ def run_allure():
                           universal_newlines=True,
                           shell=True) as result:
         out = result.communicate()
-    return render_template('blog.html', text=out, json=out)
+    return render_template('done.html', text=out, json=out)
 
 
 @app.route("/")

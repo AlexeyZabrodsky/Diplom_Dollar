@@ -9,7 +9,7 @@ from diplom.pages.locators.home_page_locators import HomeBtn
 from diplom.conftest import web_browser
 
 
-# <--------------------------------------------HEADER---------------------------------------------->
+# <--------------------------------------------HEADER------------------------------------------->
 @allure.feature('Смоук тест')
 @allure.story('Имитация скролла в низ экрана и нажатия кнопок Хедера')
 def test_header_btn(web_browser):
@@ -19,21 +19,6 @@ def test_header_btn(web_browser):
     page = HeaderBtn(web_browser)
 
     with allure.step("Проверка кнопки 'О магазине'"):
-        # elements = [('О магазине', page.button_o_magazine, 'https://www.dollar.by/about'),
-        #             ('Доставка и оплата', page.button_dostavka_i_oplata, 'https://www.dollar.by/orders'),
-        #             ('Гарантия', page.button_garantiya, 'https://www.dollar.by/garantiya'),
-        #             ('Корзина:', page.button_korzina, 'https://www.dollar.by/shopcart'),
-        #             ]
-        #
-        # for name, elem, url in elements:
-        #     if check.equal(elem.get_text(), name):
-        #         check.equal(elem.get_attribute('href'), url)
-        #         elem.click()
-        #         page1 = page.get_current_url()
-        #         check.equal(page1, url)
-        #         check.is_true(elem.wait_for_visibility())
-        #         check.is_true(elem.wait_to_be_clickable())
-        #
         if check.equal(page.button_o_magazine.get_text(), 'О магазине'):
             check.equal(page.button_o_magazine.get_attribute('href'),
                         'https://www.dollar.by/about')
@@ -1486,22 +1471,22 @@ def test_left_menu_btn(web_browser):
             check.is_true(page.button_vse_novosti.wait_to_be_clickable())
 
 
-# <--------------------------------------------ПОИСК---------------------------------------------->
+# <-------------------------------------------ПОИСК--------------------------------------------->
 @allure.feature('Смоук тест')
-@allure.story('Имитация скролла в низ экрана и нажатия кнопок Хедера')
+@allure.story('Проверка поля поиска')
 def test_poisk(web_browser):
     """ Убеждаемся, что поиск работает корректно. """
 
     page = HeaderBtn(web_browser)
 
-    with allure.step("Проверка поля поиска, ввод более трех символов"):
-        if check.equal(page.input_poisk.get_attribute('type'),'text'):
+    with allure.step("Ввод более трех символов"):
+        if check.equal(page.input_poisk.get_attribute('type'), 'text'):
             page.input_poisk.click()
             page.input_poisk.send_keys('Кастрюля')
             page.button_poisk.click()
             check.not_equal(page.assert_poisk.count(), 0)
 
-    with allure.step("Проверка поиска по заданному тексту"):
+    with allure.step("Проверка выдаваймого результата"):
         page.input_poisk.click()
         page.input_poisk.send_keys('Кастрюля')
         page.button_poisk.click()
@@ -1510,64 +1495,63 @@ def test_poisk(web_browser):
             text = element_text[0]
             check.equal(text, 'Кастрюля')
 
-    with allure.step("Проверка поля поиска, ввод менее трех символов"):
-        if check.equal(page.input_poisk.get_attribute('type'),'text'):
+    with allure.step("Ввод менее трех символов"):
+        if check.equal(page.input_poisk.get_attribute('type'), 'text'):
             page.input_poisk.click()
             page.input_poisk.send_keys('А')
             page.button_poisk.click()
             check.equal(page.assert_poisk.count(), 0)
 
-    with allure.step("Проверка поля поиска, ввод трех символов"):
-        if check.equal(page.input_poisk.get_attribute('type'),'text'):
+    with allure.step("Ввод трех символов"):
+        if check.equal(page.input_poisk.get_attribute('type'), 'text'):
             page.input_poisk.click()
             page.input_poisk.send_keys('Кот')
             page.button_poisk.click()
             check.not_equal(page.assert_poisk.count(), 0)
 
 
-# <-------------------------------------Домашняя страница----------------------------------------->
 @allure.feature('Смоук тест')
 @allure.story('Имитация скролла в низ экрана и нажатия кнопок слайдера')
-def test_home_slider(web_browser):
+def test_slider_1(web_browser):
     """ Убеждаемся, что кнопки слайдера
         кликабельные и переход слайдов корректный. """
 
     page = HomeBtn(web_browser)
 
-    with allure.step("Проверка кнопок слайдера"):
-        check.is_true(page.slider_1.wait_for_visibility())
-        check.is_true(page.slider_1.wait_to_be_clickable())
-        check.is_true(page.slider_1.is_enabled())
-        page.slider_2.click()
-        check.is_true(page.slider_2.wait_for_visibility())
-        check.is_true(page.slider_2.wait_to_be_clickable())
-        check.is_true(page.slider_2.is_enabled())
-        page.slider_3.click()
-        check.is_true(page.slider_3.wait_for_visibility())
-        check.is_true(page.slider_3.wait_to_be_clickable())
-        check.is_true(page.slider_3.is_enabled())
-        page.slider_4.click()
-        check.is_true(page.slider_4.wait_for_visibility())
-        check.is_true(page.slider_4.wait_to_be_clickable())
-        check.is_true(page.slider_4.is_enabled())
-        page.slider_5.click()
-        check.is_true(page.slider_5.wait_for_visibility())
-        check.is_true(page.slider_5.wait_to_be_clickable())
-        check.is_true(page.slider_5.is_enabled())
+    with allure.step("Проверяем кнопоки слайдера"):
+        if check.equal(page.slider.count(), 5):
+            check.is_true(page.slider_1.wait_for_visibility())
+            check.is_true(page.slider_1.wait_to_be_clickable())
+            check.is_true(page.slider_1.is_enabled())
+            page.slider_2.click()
+            check.is_true(page.slider_2.wait_for_visibility())
+            check.is_true(page.slider_2.wait_to_be_clickable())
+            check.is_true(page.slider_2.is_enabled())
+            page.slider_3.click()
+            check.is_true(page.slider_3.wait_for_visibility())
+            check.is_true(page.slider_3.wait_to_be_clickable())
+            check.is_true(page.slider_3.is_enabled())
+            page.slider_4.click()
+            check.is_true(page.slider_4.wait_for_visibility())
+            check.is_true(page.slider_4.wait_to_be_clickable())
+            check.is_true(page.slider_4.is_enabled())
+            page.slider_5.click()
+            check.is_true(page.slider_5.wait_for_visibility())
+            check.is_true(page.slider_5.wait_to_be_clickable())
+            check.is_true(page.slider_5.is_enabled())
 
 
 @allure.feature('Смоук тест')
-@allure.story('Имитация скролла в низ экрана и нажатия кнопок слайдера')
+@allure.story('Имитация скролла в низ экрана и проверка количества товара в корзине')
 def test_home_korzina(web_browser):
-    """ Убеждаемся, что добавленный товар отображается
-        количество и сумма """
+    """ Убеждаемся, что добавленный товар отображается в
+        корзине """
 
     page = HomeBtn(web_browser)
 
-    with allure.step("Проверка кнопки 'Добавить в корзину' и отображения товара в корзине."):
+    with allure.step("Добавляем в корзину товар и проверяем количество в корзине товара."):
         if check.equal(page.button_dobavit_v_korzinu.get_text(), 'В корзину'):
-            check.equal(page.button_dobavit_v_korzinu.get_attribute('title'),
-                            'Добавить в корзину')
+            check.equal(page.button_dobavit_v_korzinu.get_attribute('title'),'Добавить в корзину')
             check.is_true(page.button_dobavit_v_korzinu.wait_for_visibility())
             check.is_true(page.button_dobavit_v_korzinu.wait_to_be_clickable())
             page.button_dobavit_v_korzinu.click()
@@ -1589,7 +1573,7 @@ def test_home_zakazat(web_browser):
 
     page = HomeBtn(web_browser)
 
-    with allure.step("Проверка кнопки 'Заказать'"):
+    with allure.step("Проверяем кнопку 'Заказать'"):
         if check.equal(page.button_zakazat.get_text(), 'Заказать'):
             check.is_true(page.button_zakazat.wait_for_visibility())
             check.is_true(page.button_zakazat.wait_to_be_clickable())
@@ -1604,7 +1588,7 @@ def test_home_zakazat_form(web_browser):
 
     page = HomeBtn(web_browser)
 
-    with allure.step("Заполнение формы заказать'"):
+    with allure.step("Заполняем форму заказать'"):
         if check.equal(page.button_zakazat.get_text(), 'Заказать'):
             page.button_zakazat.click()
             check.equal(page.assert_zakazati_okno.get_text(), 'Заполните форму заказа')
@@ -1612,6 +1596,7 @@ def test_home_zakazat_form(web_browser):
             page.numbers.send_keys('999999999')
             check.is_true(page.btn_zakazat.wait_for_visibility())
             check.is_true(page.btn_zakazat.wait_to_be_clickable())
+            time.sleep(1)
             page.btn_zakazat.click()
             check.equal(page.assert_zakazati.get_text(), 'Спасибо! Ваш заказ принят!')
 
@@ -1624,7 +1609,7 @@ def test_korzina_form(web_browser):
 
     page = HomeBtn(web_browser)
 
-    with allure.step("Проверка формы заказа товара через корзину"):
+    with allure.step("Заполняем форму заказать товар через корзину"):
         if check.equal(page.button_dobavit_v_korzinu.get_text(), 'В корзину'):
             check.equal(page.button_dobavit_v_korzinu.get_attribute('title'),
                         'Добавить в корзину')
@@ -1648,10 +1633,12 @@ def test_korzina_form(web_browser):
             page.button_nalichnymi.click()
             check.is_true(page.button_nalichnymi.is_selected())
             page.input_name.send_keys('Alexey')
+            time.sleep(1)
             page.input_number.send_keys('999999999')
+            time.sleep(1)
             page.input_adress.send_keys('Minsk')
             page.input_comment.send_keys('Thanks')
-            time.sleep(4)
+            time.sleep(1)
             page.button_person_inf.click()
             check.is_true(page.button_person_inf.is_selected())
             check.is_true(page.button_podtverdit_zakaz.wait_for_visibility())
@@ -1662,13 +1649,13 @@ def test_korzina_form(web_browser):
 
 
 @allure.feature('Смоук тест')
-@allure.story('Проверка формы заказа в корзине')
+@allure.story('Проверка параметров при заказе товара')
 def test_korzina_form_2(web_browser):
-    """ Убеждаемся, что сумма изменяется в зависимости от смены параметров """
+    """ Убеждаемся, что сумма и количество изменяется в зависимости от смены параметров """
 
     page = HomeBtn(web_browser)
 
-    with allure.step("Проверка параметров при заказе товара"):
+    with allure.step("Изменяем параметры при заказе товара (цены и количество)"):
         if check.equal(page.button_dobavit_v_korzinu.get_text(), 'В корзину'):
             check.equal(page.button_dobavit_v_korzinu.get_attribute('title'),
                         'Добавить в корзину')
@@ -1685,7 +1672,7 @@ def test_korzina_form_2(web_browser):
             check.equal(page.assert_itogo.get_text_index()[0],
                         page.assert_koll_header.get_text_index()[0])
             page.button_samovyvoz.click()
-            page.assert_koll.send_keys("2")
+            page.assert_koll.send_keys_2("2")
             check.equal(page.assert_itogo.get_text_index()[0],
                         page.assert_koll_header.get_text_index()[0])
 
@@ -1697,13 +1684,10 @@ def test_korzina_delet(web_browser):
 
     page = HomeBtn(web_browser)
 
-    with allure.step("Удалить товар с корзины"):
+    with allure.step("Удаляем товар с корзины"):
         if check.equal(page.button_dobavit_v_korzinu.get_text(), 'В корзину'):
             page.button_dobavit_v_korzinu.click()
             check.is_true(page.button_delet.wait_for_visibility())
             check.is_true(page.button_delet.wait_to_be_clickable())
             page.button_delet.click()
             check.equal(page.assert_delet.get_text(), 'В Вашей корзине еще нет товаров.')
-
-
-

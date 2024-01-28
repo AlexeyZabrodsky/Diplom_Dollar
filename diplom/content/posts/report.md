@@ -8,5 +8,5 @@ link: http://127.0.0.1:8000/runallure
 
 ##Для запуска Allure отчета нажать на кнопку ниже
 
-<a href="/runallure" class="gradient-button" target="_blank">Запустить</a>
+<a href="/runallure" class="gradient-button">Запустить</a>
 

@@ -8,10 +8,11 @@ class HomeBtn(WebPage):
 
     def __init__(self, web_driver, url=''):
         if not url:
-            url = os.getenv("HOME") or 'https://www.dollar.by/'
+            url = os.getenv("HOMES") or 'https://www.dollar.by/'
 
         super().__init__(web_driver, url)
 
+    slider = ManyWebElements(css_selector='div.owl-dots [role="button"]')
     slider_1 = WebElement(css_selector='div.owl-dots button:nth-of-type(1)')
     slider_2 = WebElement(css_selector='div.owl-dots button:nth-of-type(2)')
     slider_3 = WebElement(css_selector='div.owl-dots button:nth-of-type(3)')
@@ -28,13 +29,13 @@ class HomeBtn(WebPage):
     home_sum_tovarov = WebElement(css_selector='div.header__wrapper '
                                                'div.header__shopcart__price span')
     assert_zakazati_okno = WebElement(css_selector='div.modal__window__title')
-# <------Форма заказать--------->
+    # <------Форма заказать--------->
     name_form = WebElement(css_selector='input#id_page_20660-field_0')
     numbers = WebElement(css_selector='input#id_page_20660-field_1')
     btn_zakazat = WebElement(css_selector='button#id__add___field__offer__request__send')
     assert_zakazati = WebElement(css_selector='div.modal__window__title')
 
-# <-------КОРЗИНА--------------->
+    # <-------КОРЗИНА--------------->
     slider_home = WebElement(css_selector='div.block__slider_and_day_offer__slider')
     button_info = WebElement(css_selector='div.page__shopcart__delivery_info__title__wrapper')
     assert_info = WebElement(css_selector='div.page__shopcart__delivery_info__body__wrapper '
@@ -77,3 +78,4 @@ class HomeBtn(WebPage):
     ball_otziv = WebElement(css_selector='select#id_review-rating')
     text_otziv_span = WebElement(css_selector='span.captcha-question')
     otpravit_otziv = WebElement(css_selector='div.form__item.form__button > input')
+    button_logo = WebElement(xpath='//div[@class="header__logo__image"]/a')
